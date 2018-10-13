@@ -19,11 +19,13 @@ const DEV_PORT = "5000"
 const DEV_ADDR = ""
 const DEV_STATIC = "./static_pages"
 
+var static string
+
 func main() {
 	var env string
 	var port string
 	var addr string
-	var static string
+	// var static string
 
 	flag.StringVar(&env, "env", "dev", "Server Env")
 	flag.StringVar(&port, "port", "", "Port to listen on")
@@ -137,7 +139,7 @@ func NewGame(location string) *Game {
 }
 
 func GetAllGames(w http.ResponseWriter, r *http.Request) {
-	dirs, err := ioutil.ReadDir("./static_pages/games")
+	dirs, err := ioutil.ReadDir(static + "/games")
 
 	if err != nil {
 		http.Error(w, err.Error(), 500)
